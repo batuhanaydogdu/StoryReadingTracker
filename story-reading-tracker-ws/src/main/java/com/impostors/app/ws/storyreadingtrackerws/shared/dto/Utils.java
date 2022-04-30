@@ -24,6 +24,10 @@ public class Utils {
 	{
 		return generateRandomString(length);
 	}
+	public String generateStoryId(int length)
+	{
+		return generateRandomString(length);
+	}
 
 
 	

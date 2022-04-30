@@ -46,6 +46,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 				.permitAll()
 				.antMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL)
 				.permitAll()
+
+				.antMatchers(HttpMethod.POST,"stories/**").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers(HttpMethod.PUT,"stories/**").hasAnyAuthority("ROLE_ADMIN")
 				/*	.antMatchers(HttpMethod.DELETE,"/users/**").hasRole("ACADEMICIAN") //here is for using role
                                                               //.hasAuthority("DELETE_AUTHORITY)
                                                               //hasAnyroleorauthority  for more than one role or authority
