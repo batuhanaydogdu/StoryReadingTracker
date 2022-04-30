@@ -1,8 +1,9 @@
 package com.impostors.app.ws.storyreadingtrackerws.shared.dto;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class UserDto {
+public class UserDto implements Serializable {
 
 
     private static final long serialVersionUID=4865903039190150223l;
@@ -20,6 +21,7 @@ public class UserDto {
     private String emailVerificationToken;
     private Boolean emailVerificationStatus;
     private Collection<String> roles;
+
 
     public UserDto() {
     }

@@ -52,11 +52,11 @@ public class InitialUsersSetup {
 		
 		if(roleAdmin==null) return;
 		
-		if(userRepository.findByEmail("fortest@test.com")!=null) return;
+		if(userRepository.findByEmail("fortest2@test.com")!=null) return;
 		UserEntity adminUser=new UserEntity();
-		adminUser.setFirstName("batuhan");
-		adminUser.setLastName("aydoğdu");
-		adminUser.setEmail("fortest@test.com");
+		adminUser.setFirstName("batuhan2");
+		adminUser.setLastName("aydoğdu2");
+		adminUser.setEmail("fortest2@test.com");
 		adminUser.setEmailVerificationStatus(true);
 		adminUser.setAge(23);
 		adminUser.setGender("Male");

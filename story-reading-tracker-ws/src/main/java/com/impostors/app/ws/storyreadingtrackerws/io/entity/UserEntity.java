@@ -52,6 +52,11 @@ public class UserEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name="roles_id",referencedColumnName="id") )
     private Collection<RoleEntity> roles;
 
+    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST)
+    private Collection<StoryUserEntity> storiesUsers;
+
+
+
     public long getId() {
         return id;
     }
@@ -154,5 +159,13 @@ public class UserEntity implements Serializable {
 
     public void setTermsAndPoliciesAccepted(boolean termsAndPoliciesAccepted) {
         this.termsAndPoliciesAccepted = termsAndPoliciesAccepted;
+    }
+
+    public Collection<StoryUserEntity> getStoriesUsers() {
+        return storiesUsers;
+    }
+
+    public void setStoriesUsers(Collection<StoryUserEntity> storiesUsers) {
+        this.storiesUsers = storiesUsers;
     }
 }
