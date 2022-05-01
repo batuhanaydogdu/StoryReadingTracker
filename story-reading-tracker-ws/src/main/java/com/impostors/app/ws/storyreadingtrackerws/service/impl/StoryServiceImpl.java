@@ -96,4 +96,16 @@ public class StoryServiceImpl implements StoryService {
         return returnValue;
     }
 
+    @Override
+    public StoryDto getRandomStory() {
+
+        StoryEntity takenStory=storyRepository.getRandomStory();
+
+        ModelMapper modelMapper=new ModelMapper();
+
+        StoryDto returnValue=modelMapper.map(takenStory,StoryDto.class);
+
+        return returnValue;
+    }
+
 }

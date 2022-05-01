@@ -52,7 +52,7 @@ public class UserEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name="roles_id",referencedColumnName="id") )
     private Collection<RoleEntity> roles;
 
-    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<StoryUserEntity> storiesUsers;
 
 

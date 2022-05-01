@@ -32,7 +32,7 @@ public class StoryEntity implements Serializable {
     @Column(nullable=false)
     private String updatedBy;
 
-    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "storyDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<StoryUserEntity> storiesUsers;
 
 
