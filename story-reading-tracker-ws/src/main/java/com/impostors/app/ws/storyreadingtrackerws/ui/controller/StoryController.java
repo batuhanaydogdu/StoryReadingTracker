@@ -67,5 +67,24 @@ public class StoryController {
         return returnValue;
     }
 
+    @GetMapping(path="/randomStory")
+    public StoryRest getRandomStory()
+    {
+        StoryRest returnValue=new StoryRest();
+
+
+
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        StoryDto takenStory=storyService.getRandomStory();
+        returnValue=modelMapper.map(takenStory, StoryRest.class);
+
+
+        return returnValue;
+    }
+
 
 }

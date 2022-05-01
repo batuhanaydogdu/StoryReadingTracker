@@ -29,11 +29,11 @@ public class StoryUserEntity implements Serializable {
     @Column(nullable=false)
     private Date readOnDate;
 
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name="users_id")
     private UserEntity userDetails;
 
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name="stories_id")
     private StoryEntity storyDetails;
 

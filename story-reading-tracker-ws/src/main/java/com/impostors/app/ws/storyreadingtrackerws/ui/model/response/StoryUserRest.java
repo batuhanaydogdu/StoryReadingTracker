@@ -1,13 +1,11 @@
-package com.impostors.app.ws.storyreadingtrackerws.shared.dto;
+package com.impostors.app.ws.storyreadingtrackerws.ui.model.response;
 
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.UserDto;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class StoryUserDto implements Serializable {
-    private static final long serialVersionUID=4865903039190150223l;
-    private long id;
-
+public class StoryUserRest {
     private String storyUserId;
     private int feedbackRate;
     private int gainedPoint;
@@ -15,15 +13,6 @@ public class StoryUserDto implements Serializable {
     private Date readOnDate;
     private UserDto userDetails;
     private StoryDto storyDetails;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getStoryUserId() {
         return storyUserId;
