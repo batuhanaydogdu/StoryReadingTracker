@@ -41,7 +41,7 @@ public class InitialUsersSetup {
 	@EventListener
 	@Transactional
 	public void onApplicationEvent(ApplicationReadyEvent event) {
-		System.out.println("denemstarttttttt");
+	/*	System.out.println("denemstarttttttt");
 		
 		AuthorityEntity readAuthority=createAuthority("READ_AUTHORITY");
 		AuthorityEntity writeAuthority=createAuthority("WRITE_AUTHORITY");
@@ -66,7 +66,7 @@ public class InitialUsersSetup {
 		adminUser.setEncryptedPassword(bCyrptPasswordEncoder.encode("123"));
 		adminUser.setRoles(Arrays.asList(roleAdmin,roleUser));
 		
-		userRepository.save(adminUser);
+		userRepository.save(adminUser);*/
 		
 	}
 	

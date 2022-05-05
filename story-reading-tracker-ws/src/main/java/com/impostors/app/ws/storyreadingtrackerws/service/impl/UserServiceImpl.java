@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -94,6 +95,48 @@ public class UserServiceImpl implements UserService {
         //Send email
         //new AmazonSES().verifyEmail(returnValue);
 
+
+        return returnValue;
+    }
+
+    @Override
+    public UserDto getUserByEmail(String email) {
+
+        if(userRepository.findByEmail(email)==null)
+        {
+            throw new RuntimeException("Record not exists.");
+        }
+
+        UserEntity userEntity=userRepository.findByEmail(email);
+
+        ModelMapper modelMapper=new ModelMapper();
+
+        UserDto returnValue=modelMapper.map(userEntity,UserDto.class);
+
+
+
+
+
+        return returnValue;
+    }
+
+    @Override
+    public UserDto getCurrentUser() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+
+        UserEntity userEntity=userRepository.findByEmail(username);
+        if(userEntity==null) throw new UsernameNotFoundException(username);
+
+        UserDto returnValue=new UserDto();
+        BeanUtils.copyProperties(userEntity, returnValue);
 
         return returnValue;
     }

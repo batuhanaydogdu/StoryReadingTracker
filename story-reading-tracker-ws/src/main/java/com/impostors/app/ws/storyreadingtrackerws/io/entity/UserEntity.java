@@ -55,6 +55,9 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<StoryUserEntity> storiesUsers;
 
+    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
+    private Collection<FeedbackEntity> feedbacks;
+
 
 
     public long getId() {
@@ -167,5 +170,13 @@ public class UserEntity implements Serializable {
 
     public void setStoriesUsers(Collection<StoryUserEntity> storiesUsers) {
         this.storiesUsers = storiesUsers;
+    }
+
+    public Collection<FeedbackEntity> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Collection<FeedbackEntity> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 }

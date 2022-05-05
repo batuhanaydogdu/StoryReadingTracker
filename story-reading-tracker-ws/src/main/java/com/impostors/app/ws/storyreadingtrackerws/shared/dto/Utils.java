@@ -32,6 +32,10 @@ public class Utils {
 	{
 		return generateRandomString(length);
 	}
+	public String generateFeedbackId(int length)
+	{
+		return generateRandomString(length);
+	}
 
 	
 	

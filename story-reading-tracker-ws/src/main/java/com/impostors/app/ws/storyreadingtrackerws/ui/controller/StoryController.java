@@ -46,7 +46,7 @@ public class StoryController {
     }
 
     @PutMapping(path="/{id}")
-    public StoryRest updateCorse(@RequestBody StoryRequestModel storyDetails,@PathVariable String id)
+    public StoryRest updateStory(@RequestBody StoryRequestModel storyDetails,@PathVariable String id)
     {
         StoryRest returnValue=new StoryRest();
 
