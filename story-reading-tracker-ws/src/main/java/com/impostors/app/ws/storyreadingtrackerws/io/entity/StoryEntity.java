@@ -35,6 +35,9 @@ public class StoryEntity implements Serializable {
     @OneToMany(mappedBy = "storyDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<StoryUserEntity> storiesUsers;
 
+    @OneToMany(mappedBy = "storyDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
+    private Collection<FeedbackEntity> feedbacks;
+
 
     public long getId() {
         return id;
@@ -98,5 +101,13 @@ public class StoryEntity implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Collection<FeedbackEntity> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Collection<FeedbackEntity> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 }

@@ -8,11 +8,9 @@ import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.UserDetailsRe
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.UserSimpleRest;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -50,6 +48,37 @@ public class UserController {
 
         return returnValue;
 
+    }
+
+    @GetMapping(path="/{email}")
+    public UserSimpleRest getUser(@PathVariable String email)
+    {
+        UserSimpleRest returnValue=new UserSimpleRest();
+
+        UserDto userDto= userService.getUserByEmail(email);
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        returnValue=modelMapper.map(userDto, UserSimpleRest.class);
+
+        return returnValue;
+    }
+
+    @GetMapping("/currentUser")
+    public UserSimpleRest getCurrentUser(){
+        UserSimpleRest returnValue=new UserSimpleRest();
+
+        UserDto userDto= userService.getCurrentUser();
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        returnValue=modelMapper.map(userDto, UserSimpleRest.class);
+
+        return returnValue;
     }
 
 
