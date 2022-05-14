@@ -1,7 +1,7 @@
 package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.StoryRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.StoryRepository;
 import com.impostors.app.ws.storyreadingtrackerws.service.StoryService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
@@ -12,8 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
-import java.security.Security;
 import java.util.Date;
 
 @Service

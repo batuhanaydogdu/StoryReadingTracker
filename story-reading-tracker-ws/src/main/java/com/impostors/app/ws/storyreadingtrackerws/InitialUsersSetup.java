@@ -1,14 +1,21 @@
 package com.impostors.app.ws.storyreadingtrackerws;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
+import com.impostors.app.ws.storyreadingtrackerws.io.document.Contour;
+import com.impostors.app.ws.storyreadingtrackerws.io.document.FaceExperienceDocument;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.AuthorityEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.RoleEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.AuthorityRepository;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.RoleRepository;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.UserRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mongodb.FaceExperienceRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.AuthorityRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.RoleRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Roles;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +43,17 @@ public class InitialUsersSetup {
 	
 	@Autowired
 	UserRepository userRepository;
+
 	
 	
 	@EventListener
 	@Transactional
 	public void onApplicationEvent(ApplicationReadyEvent event) {
-	/*	System.out.println("denemstarttttttt");
-		
+		System.out.println("denemstarttttttt");
+
+
+
+
 		AuthorityEntity readAuthority=createAuthority("READ_AUTHORITY");
 		AuthorityEntity writeAuthority=createAuthority("WRITE_AUTHORITY");
 		AuthorityEntity deleteAuthority=createAuthority("DELETE_AUTHORITY");
@@ -66,7 +77,7 @@ public class InitialUsersSetup {
 		adminUser.setEncryptedPassword(bCyrptPasswordEncoder.encode("123"));
 		adminUser.setRoles(Arrays.asList(roleAdmin,roleUser));
 		
-		userRepository.save(adminUser);*/
+		userRepository.save(adminUser);
 		
 	}
 	

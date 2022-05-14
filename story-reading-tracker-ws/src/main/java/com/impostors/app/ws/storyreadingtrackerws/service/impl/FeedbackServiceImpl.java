@@ -1,13 +1,11 @@
 package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.FeedbackEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.FeedbackRepository;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.StoryRepository;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.UserRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.FeedbackRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.StoryRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.service.FeedbackService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.FeedbackDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
