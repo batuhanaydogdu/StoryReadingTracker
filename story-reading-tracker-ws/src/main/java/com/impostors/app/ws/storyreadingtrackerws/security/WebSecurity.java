@@ -2,7 +2,7 @@ package com.impostors.app.ws.storyreadingtrackerws.security;
 
 import java.util.Arrays;
 
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.UserRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.service.UserService;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

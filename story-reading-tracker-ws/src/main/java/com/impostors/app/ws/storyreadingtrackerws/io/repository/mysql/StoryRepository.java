@@ -1,4 +1,4 @@
-package com.impostors.app.ws.storyreadingtrackerws.io.repository;
+package com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql;
 
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
 import org.springframework.data.jpa.repository.Query;
