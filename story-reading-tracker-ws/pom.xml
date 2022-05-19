@@ -8,11 +8,16 @@
 		<version>2.6.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
+
 	<groupId>com.impostors.app.ws</groupId>
-	<artifactId>story-reading-tracker-ws</artifactId>
+	<artifactId>story-app-ws</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>story-reading-tracker-ws</name>
 	<description>web services for story reading tracker mobile application</description>
+
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
