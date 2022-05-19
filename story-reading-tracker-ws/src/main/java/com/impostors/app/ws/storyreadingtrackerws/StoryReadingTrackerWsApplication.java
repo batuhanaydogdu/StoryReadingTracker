@@ -15,10 +15,14 @@ public class StoryReadingTrackerWsApplication extends SpringBootServletInitializ
 		SpringApplication.run(StoryReadingTrackerWsApplication.class, args);
 	}
 
+
+
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(StoryReadingTrackerWsApplication.class);
 	}
+
 
 	@Bean
 	public SpringApplicationContext springApplicationContext() {
