@@ -18,6 +18,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("faceExperiences")
 public class FaceExperienceController {
@@ -59,9 +62,24 @@ public class FaceExperienceController {
 
         faceExperienceService.addContour(contourDto,faceExperienceId);
 
+    }
+
+    @PutMapping(path="/{faceExperienceId}/all")
+    public void addAllContours(@RequestBody List<ContourRequestModel> contourDetails, @PathVariable String faceExperienceId) throws Exception
+    {
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+        List<ContourDto> contourDtoList=new ArrayList<>();
+        for(ContourRequestModel crm: contourDetails){
+            ContourDto contourDto=modelMapper.map(crm,ContourDto.class);
+            contourDtoList.add(contourDto);
+        }
 
 
 
+        faceExperienceService.addAllContours(contourDtoList,faceExperienceId);
 
     }
 
