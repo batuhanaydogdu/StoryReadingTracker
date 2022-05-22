@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class FaceExperienceServiceImpl implements FaceExperienceService {
@@ -91,6 +92,29 @@ public class FaceExperienceServiceImpl implements FaceExperienceService {
         Contour contour=modelMapper.map(contourDto,Contour.class);
 
         faceExperienceDocument.getPoints().add(contour);
+
+        faceExperienceRepository.save(faceExperienceDocument);
+    }
+
+    @Override
+    public void addAllContours(List<ContourDto> contourDtoList, String faceExperienceId) {
+        FaceExperienceDocument faceExperienceDocument=faceExperienceRepository.findById(faceExperienceId).get();
+
+        if(faceExperienceDocument==null){
+            throw new RuntimeException("There is no such a Reading Face Experience.");
+        }
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        for(ContourDto cd: contourDtoList){
+            Contour contour=modelMapper.map(cd,Contour.class);
+            faceExperienceDocument.getPoints().add(contour);
+        }
+
+
+
+
 
         faceExperienceRepository.save(faceExperienceDocument);
     }

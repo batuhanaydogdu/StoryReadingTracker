@@ -26,6 +26,9 @@ public class StoryUserEntity implements Serializable {
     @Column(nullable=false)
     private int successRate;
 
+    @Column(nullable=true)
+    private String faceExperienceDocumentId;
+
     @Column(nullable=false)
     private Date readOnDate;
 
@@ -100,5 +103,13 @@ public class StoryUserEntity implements Serializable {
 
     public void setStoryDetails(StoryEntity storyDetails) {
         this.storyDetails = storyDetails;
+    }
+
+    public String getFaceExperienceDocumentId() {
+        return faceExperienceDocumentId;
+    }
+
+    public void setFaceExperienceDocumentId(String faceExperienceDocumentId) {
+        this.faceExperienceDocumentId = faceExperienceDocumentId;
     }
 }

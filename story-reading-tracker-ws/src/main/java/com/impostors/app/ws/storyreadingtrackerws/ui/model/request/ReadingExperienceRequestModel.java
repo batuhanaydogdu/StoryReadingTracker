@@ -5,6 +5,7 @@ public class ReadingExperienceRequestModel {
     private int feedbackRate;
     private int gainedPoint;
     private int successRate;
+    private String faceExperienceDocumentId;
 
 
     public int getFeedbackRate() {
@@ -31,5 +32,11 @@ public class ReadingExperienceRequestModel {
         this.successRate = successRate;
     }
 
+    public String getFaceExperienceDocumentId() {
+        return faceExperienceDocumentId;
+    }
 
+    public void setFaceExperienceDocumentId(String faceExperienceDocumentId) {
+        this.faceExperienceDocumentId = faceExperienceDocumentId;
+    }
 }

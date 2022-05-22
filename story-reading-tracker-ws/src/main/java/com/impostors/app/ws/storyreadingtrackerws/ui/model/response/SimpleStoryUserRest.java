@@ -11,6 +11,7 @@ public class SimpleStoryUserRest {
     private int successRate;
     private Date readOnDate;
     private StoryDto storyDetails;
+    private String faceExperienceDocumentId;
 
 
     public String getStoryUserId() {
@@ -59,5 +60,13 @@ public class SimpleStoryUserRest {
 
     public void setStoryDetails(StoryDto storyDetails) {
         this.storyDetails = storyDetails;
+    }
+
+    public String getFaceExperienceDocumentId() {
+        return faceExperienceDocumentId;
+    }
+
+    public void setFaceExperienceDocumentId(String faceExperienceDocumentId) {
+        this.faceExperienceDocumentId = faceExperienceDocumentId;
     }
 }

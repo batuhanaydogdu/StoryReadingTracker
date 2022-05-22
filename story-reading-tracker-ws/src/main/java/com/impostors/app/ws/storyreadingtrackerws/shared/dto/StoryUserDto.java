@@ -15,6 +15,7 @@ public class StoryUserDto implements Serializable {
     private Date readOnDate;
     private UserDto userDetails;
     private StoryDto storyDetails;
+    private String faceExperienceDocumentId;
 
 
     public long getId() {
@@ -79,5 +80,13 @@ public class StoryUserDto implements Serializable {
 
     public void setStoryDetails(StoryDto storyDetails) {
         this.storyDetails = storyDetails;
+    }
+
+    public String getFaceExperienceDocumentId() {
+        return faceExperienceDocumentId;
+    }
+
+    public void setFaceExperienceDocumentId(String faceExperienceDocumentId) {
+        this.faceExperienceDocumentId = faceExperienceDocumentId;
     }
 }
