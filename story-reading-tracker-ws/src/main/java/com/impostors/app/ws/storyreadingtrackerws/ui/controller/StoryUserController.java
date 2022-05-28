@@ -52,7 +52,7 @@ public class StoryUserController {
     }
 
     @GetMapping(path="/getStories/{userId}")
-    public List<SimpleStoryUserRest> getUsers(@PathVariable String userId){
+    public List<SimpleStoryUserRest> getUserStories(@PathVariable String userId){
         List<SimpleStoryUserRest> returnValue=new ArrayList<>();
         List<StoryUserDto> storyUserDtos=storyUserService.getStoriesOfUser(userId);
 
