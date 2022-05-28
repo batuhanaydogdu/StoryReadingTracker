@@ -9,6 +9,8 @@ public class UserSimpleRest {
     private String gender;
     private int points;
     private boolean termsAndPoliciesAccepted;
+
+
     public String getUserId() {
         return userId;
     }
