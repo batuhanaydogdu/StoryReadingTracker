@@ -1,10 +1,12 @@
 package com.impostors.app.ws.storyreadingtrackerws.ui.controller;
 
+import com.impostors.app.ws.storyreadingtrackerws.exceptions.StoryServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.service.UserService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Roles;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.UserDto;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.UserDetailsRequestModel;
+import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.UserUpdateRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.UserSimpleRest;
 import org.modelmapper.ModelMapper;
@@ -80,6 +82,24 @@ public class UserController {
 
         return returnValue;
     }
+    @PutMapping(path = "/updateUser")
+    public UserSimpleRest updateUser(@RequestBody UserUpdateRequestModel userUpdateRequestModel){
+        UserSimpleRest returnValue;
+        if(userUpdateRequestModel.getFirstName().isEmpty()||userUpdateRequestModel.getLastName().isEmpty()||userUpdateRequestModel.getGender().isEmpty()){
+            throw new StoryServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+        }
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+        UserDto userDto =modelMapper.map(userUpdateRequestModel,UserDto.class);
+        UserDto updatedUser = userService.updateUser(userDto);
+        returnValue=modelMapper.map(updatedUser,UserSimpleRest.class);
+        return returnValue;
+
+
+    }
+
+
 
 
 }

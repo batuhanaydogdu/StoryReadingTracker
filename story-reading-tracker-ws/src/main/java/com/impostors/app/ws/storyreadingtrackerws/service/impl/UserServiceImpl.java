@@ -138,6 +138,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto updateUser(UserDto simpleUserDto) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        UserEntity userEntity=userRepository.findByEmail(username);
+
+        ModelMapper modelMapper=new ModelMapper();
+
+        userEntity.setFirstName(simpleUserDto.getFirstName());
+        userEntity.setGender(simpleUserDto.getGender());
+        userEntity.setAge(simpleUserDto.getAge());
+        userEntity.setLastName(simpleUserDto.getLastName());
+
+        UserEntity updatedUser=userRepository.save(userEntity);
+        UserDto returnValue = modelMapper.map(updatedUser,UserDto.class);
+
+        return returnValue;
+    }
+
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity=userRepository.findByEmail(email);
         if(userEntity==null) throw new UsernameNotFoundException(email);
