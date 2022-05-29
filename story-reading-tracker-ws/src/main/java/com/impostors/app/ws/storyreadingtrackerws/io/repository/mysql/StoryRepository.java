@@ -14,8 +14,11 @@ public interface StoryRepository extends CrudRepository<StoryEntity, Long> {
     StoryEntity findByTitle(String title);
     StoryEntity findByStoryId(String storyId);
 
-    @Query(value="select * from stories s order by rand() limit 1",nativeQuery = true)
+    @Query(value="select * from stories s where s.row_status=true order by rand() limit 1",nativeQuery = true)
     StoryEntity getRandomStory();
+
+    @Query(value="select * from stories s where s.row_status=true ",nativeQuery = true)
+    List<StoryEntity> getAllStories();
 
 
 }

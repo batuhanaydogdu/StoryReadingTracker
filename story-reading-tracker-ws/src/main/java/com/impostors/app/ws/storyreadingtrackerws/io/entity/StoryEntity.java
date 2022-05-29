@@ -32,6 +32,9 @@ public class StoryEntity implements Serializable {
     @Column(nullable=false)
     private String updatedBy;
 
+    @Column(nullable=false)
+    private boolean rowStatus;
+
     @OneToMany(mappedBy = "storyDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<StoryUserEntity> storiesUsers;
 
@@ -109,5 +112,14 @@ public class StoryEntity implements Serializable {
 
     public void setFeedbacks(Collection<FeedbackEntity> feedbacks) {
         this.feedbacks = feedbacks;
+    }
+
+
+    public boolean getRowStatus() {
+        return rowStatus;
+    }
+
+    public void setRowStatus(boolean rowStatus) {
+        this.rowStatus = rowStatus;
     }
 }
