@@ -11,6 +11,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("stories")
 public class StoryController {
@@ -84,6 +87,48 @@ public class StoryController {
 
 
         return returnValue;
+    }
+
+    @GetMapping(path="/allStories")
+    public List<StoryRest> getAllStories()
+    {
+        ArrayList<StoryRest> returnValue=new ArrayList<>();
+
+
+
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        List<StoryDto> takenStories=new ArrayList<>();
+
+        takenStories=storyService.getAllStories();
+
+        for(StoryDto storyDto:takenStories){
+            returnValue.add(modelMapper.map(storyDto,StoryRest.class));
+
+
+        }
+
+
+
+        return returnValue;
+    }
+
+
+    @PutMapping(path="/{storyId}/removeStory")
+    public void removeStory(@PathVariable String storyId){
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        storyService.removeStory(storyId);
+
+
+
+
     }
 
 

@@ -12,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class StoryServiceImpl implements StoryService {
@@ -49,6 +51,7 @@ public class StoryServiceImpl implements StoryService {
         storyEntity.setCreatedOn(new Date());
         storyEntity.setUpdatedOn(new Date());
         storyEntity.setUpdatedBy(username);
+        storyEntity.setRowStatus(true);
 
         StoryEntity storedStoryDetails=storyRepository.save(storyEntity);
 
@@ -97,6 +100,8 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public StoryDto getRandomStory() {
 
+
+
         StoryEntity takenStory=storyRepository.getRandomStory();
 
         ModelMapper modelMapper=new ModelMapper();
@@ -104,6 +109,49 @@ public class StoryServiceImpl implements StoryService {
         StoryDto returnValue=modelMapper.map(takenStory,StoryDto.class);
 
         return returnValue;
+    }
+
+    @Override
+    public List<StoryDto> getAllStories() {
+        List<StoryEntity> storyEntities=new ArrayList<>();
+        List<StoryDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+
+        storyEntities=storyRepository.getAllStories();
+
+        for(StoryEntity storyEntity: storyEntities){
+
+            if(storyEntity.getRowStatus()){
+                returnValue.add(modelMapper.map(storyEntity,StoryDto.class));
+            }
+
+
+        }
+
+
+
+        return returnValue;
+    }
+
+    @Override
+    public void removeStory(String storyId) {
+        StoryEntity storyEntity=storyRepository.findByStoryId(storyId);
+
+        if(storyEntity==null)
+        {
+            throw new RuntimeException("Record not exists.");
+        }
+        storyEntity.setRowStatus(false);
+
+
+        storyRepository.save(storyEntity);
+
+
+
+
+
+
     }
 
 }

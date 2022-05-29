@@ -68,7 +68,7 @@ public class UserController {
         return returnValue;
     }
 
-    @GetMapping("/currentUser")
+    @GetMapping(path="/currentUser")
     public UserSimpleRest getCurrentUser(){
         UserSimpleRest returnValue=new UserSimpleRest();
 
