@@ -9,7 +9,9 @@ public enum ErrorMessages {
 	AUTHENTICATION_FAILED("Authentication failed"),
 	COULD_NOT_UPDATE_RECORD("Couldn't update record"),
 	COULD_NOT_DELETE_RECORD("Couldn't delete record"),
+	NO_ENUGH_CREDIT("No enough point to buy this avatar"),
 	EMAIL_ADDRESS_NOT_VERIFIED("Email address couldn't be verified");
+
 	
 	private String errorMessage;
 	

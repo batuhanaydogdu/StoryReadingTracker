@@ -40,6 +40,9 @@ public class Utils {
 	{
 		return generateRandomString(length);
 	}
+	public String generateAvatarId(int length){
+		return generateRandomString(length);
+	}
 
 	
 	
