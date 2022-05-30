@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name="users")
 public class UserEntity implements Serializable {
@@ -58,7 +59,19 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)//
     private Collection<FeedbackEntity> feedbacks;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER )
+    @JoinTable(name="users_avatars",
+            joinColumns =  @JoinColumn(name="users_id", updatable = true,referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="avatars_id", updatable = true,referencedColumnName="id") )
+    private Set<AvatarEntity> avatars;
 
+    public Set<AvatarEntity> getAvatars() {
+        return avatars;
+    }
+
+    public void setAvatars(Set<AvatarEntity> avatars) {
+        this.avatars = avatars;
+    }
 
     public long getId() {
         return id;
@@ -179,4 +192,8 @@ public class UserEntity implements Serializable {
     public void setFeedbacks(Collection<FeedbackEntity> feedbacks) {
         this.feedbacks = feedbacks;
     }
+
+
+
+
 }
