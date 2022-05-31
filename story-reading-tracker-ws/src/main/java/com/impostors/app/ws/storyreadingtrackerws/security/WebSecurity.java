@@ -44,7 +44,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 				.and()
 				.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL+"/login")
 				.permitAll()
+
 				.antMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL)
+				.permitAll()
+				.and()
+				.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST,"/passwordChanges/**")
+				.permitAll()
+
+				.and()
+				.csrf().disable().authorizeRequests().antMatchers(HttpMethod.PUT,"/passwordChanges/**")
 				.permitAll()
 
 				.antMatchers(HttpMethod.POST,"stories/**").hasAnyAuthority("ROLE_ADMIN")

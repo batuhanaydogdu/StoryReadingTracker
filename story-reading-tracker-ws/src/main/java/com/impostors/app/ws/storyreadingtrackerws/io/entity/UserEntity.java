@@ -65,6 +65,20 @@ public class UserEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name="avatars_id", updatable = true,referencedColumnName="id") )
     private Set<AvatarEntity> avatars;
 
+    @OneToMany(mappedBy = "userDetails",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    private Collection<PasswordChangeEntity> passwordChanges;
+/*
+    @ManyToMany(cascade = {CascadeType.PERSIST} )
+    @JoinTable(name="users_password_changes",
+            joinColumns = @JoinColumn(name="users_id",referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="password_changes_id",referencedColumnName="id") )
+    private Collection<PasswordChangeEntity> passwordChanges;
+
+*/
+
+
+
+
     public Set<AvatarEntity> getAvatars() {
         return avatars;
     }
@@ -193,7 +207,11 @@ public class UserEntity implements Serializable {
         this.feedbacks = feedbacks;
     }
 
+    public Collection<PasswordChangeEntity> getPasswordChanges() {
+        return passwordChanges;
+    }
 
-
-
+    public void setPasswordChanges(Collection<PasswordChangeEntity> passwordChanges) {
+        this.passwordChanges = passwordChanges;
+    }
 }

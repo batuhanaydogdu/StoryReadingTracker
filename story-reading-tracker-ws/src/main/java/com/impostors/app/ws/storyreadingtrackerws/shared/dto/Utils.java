@@ -17,6 +17,7 @@ public class Utils {
 
 	private final Random RANDOM= new SecureRandom();
 	private final String ALPHABET="0123456789ABCDEFGHUJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	private final String NUMBERS="0123456789";
 	private final int ITERATIONS=10000;
 	private final int KEY_LENGTH = 256;
 	
@@ -44,6 +45,10 @@ public class Utils {
 		return generateRandomString(length);
 	}
 
+	public String generateVerificationCode(int length){
+		return generateRandomIntegers(length);
+	}
+
 	
 	
 	private String generateRandomString(int length)
@@ -51,6 +56,15 @@ public class Utils {
 		StringBuilder returnValue=new StringBuilder(length);
 		for(int i=0;i<length;i++) {
 			returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+		}
+		return new String(returnValue);
+	}
+
+	private String generateRandomIntegers(int length)
+	{
+		StringBuilder returnValue=new StringBuilder(length);
+		for(int i=0;i<length;i++) {
+			returnValue.append(NUMBERS.charAt(RANDOM.nextInt(NUMBERS.length())));
 		}
 		return new String(returnValue);
 	}
