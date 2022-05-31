@@ -3,15 +3,13 @@ package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserAvatarException;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.AvatarEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.RoleEntity;
+import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.AvatarRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.RoleRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.service.AvatarService;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.AvatarDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.RoleDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.UserDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.*;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -128,6 +126,22 @@ public class AvatarServiceImpl implements AvatarService {
 
 
 
+
+        return returnValue;
+    }
+
+    @Override
+    public List<AvatarDto> getAllAvatars() {
+        List<AvatarEntity> avatarEntities=new ArrayList<>();
+        List<AvatarDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        avatarEntities=avatarRepository.findAll();
+        for(AvatarEntity avatarEntity: avatarEntities){
+
+
+            returnValue.add(modelMapper.map(avatarEntity,AvatarDto.class));
+        }
 
         return returnValue;
     }

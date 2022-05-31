@@ -11,4 +11,6 @@ public interface AvatarService {
     AvatarDto createAvatar(AvatarDto avatar);
     AvatarDto buyAvatar(AvatarDto avatar);
 
+    List<AvatarDto> getAllAvatars();
+
 }

@@ -17,4 +17,6 @@ public interface AvatarRepository extends CrudRepository<AvatarEntity, Long> {
 
     AvatarEntity findByAvatarName(String avatarName);
 
+    List<AvatarEntity> findAll();
+
 }

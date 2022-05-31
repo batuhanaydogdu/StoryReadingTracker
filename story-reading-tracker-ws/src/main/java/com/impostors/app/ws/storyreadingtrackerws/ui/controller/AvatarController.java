@@ -4,15 +4,18 @@ package com.impostors.app.ws.storyreadingtrackerws.ui.controller;
 import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.service.AvatarService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.AvatarDto;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.AvatarDetailsRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.AvatarRest;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
+import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.StoryRest;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("avatars")
@@ -55,6 +58,24 @@ public class AvatarController {
         return returnValue;
     }
 
+    @GetMapping(path="/allAvatars")
+    public List<AvatarRest> getAllAvatars(){
+        ArrayList<AvatarRest> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //Intelligently matches source and destination properties
+
+        List<AvatarDto> takenAvatars=new ArrayList<>();
+
+        takenAvatars=avatarService.getAllAvatars();
+
+        for(AvatarDto avatarDto :takenAvatars){
+            returnValue.add(modelMapper.map(avatarDto,AvatarRest.class));
+        }
+
+        return returnValue;
+    }
 
 
 
