@@ -2,17 +2,17 @@ package com.impostors.app.ws.storyreadingtrackerws.ui.model.response;
 
 public class AvatarRest {
 
-    private String name;
+    private String avatarName;
     private String avatarId;
     private String avatarPrice;
     private String avatarURL;
 
-    public String getName() {
-        return name;
+    public String getAvatarName() {
+        return avatarName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAvatarName(String avatarName) {
+        this.avatarName = avatarName;
     }
 
     public String getAvatarId() {

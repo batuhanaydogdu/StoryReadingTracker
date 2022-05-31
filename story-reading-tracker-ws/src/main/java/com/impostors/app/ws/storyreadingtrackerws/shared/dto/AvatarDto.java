@@ -3,6 +3,7 @@ package com.impostors.app.ws.storyreadingtrackerws.shared.dto;
 public class AvatarDto {
 
     private long id;
+    private String avatarId;
     private String avatarName;
     private int avatarPrice;
     private String avatarURL;
@@ -13,6 +14,14 @@ public class AvatarDto {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getAvatarId() {
+        return avatarId;
+    }
+
+    public void setAvatarId(String avatarId) {
+        this.avatarId = avatarId;
     }
 
     public String getAvatarName() {
