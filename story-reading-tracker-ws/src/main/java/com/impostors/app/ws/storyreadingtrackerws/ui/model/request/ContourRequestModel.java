@@ -26,7 +26,25 @@ public class ContourRequestModel {
     private float rotY ;
     private float rotZ;
     private long readingMilisecond;
+    private int centerX;
+    private int centerY;
 
+
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(int centerX) {
+        this.centerX = centerX;
+    }
+
+    public int getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(int centerY) {
+        this.centerY = centerY;
+    }
 
     public List<Point2> getFaceOvalContour() {
         return faceOvalContour;
