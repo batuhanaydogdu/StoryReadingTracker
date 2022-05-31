@@ -118,4 +118,25 @@ public class FaceExperienceServiceImpl implements FaceExperienceService {
 
         faceExperienceRepository.save(faceExperienceDocument);
     }
+
+    @Override
+    public List<ContourDto> getContoursOfFaceExperience(String faceExperienceId) {
+        FaceExperienceDocument faceExperienceDocument=faceExperienceRepository.findById(faceExperienceId).get();
+        if(faceExperienceDocument==null){
+            throw new RuntimeException("There is no such a Reading Face Experience.");
+        }
+        List<ContourDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        for(Contour contour: faceExperienceDocument.getPoints()){
+            ContourDto contourDto=modelMapper.map(contour,ContourDto.class);
+            returnValue.add(contourDto);
+        }
+
+
+        return returnValue;
+    }
 }
