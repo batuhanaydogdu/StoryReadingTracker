@@ -12,6 +12,16 @@ public class FeedbackRequestModel {
     private boolean feedbackRead;
     private Date createdOn;
 
+    private float feedbackRate;
+
+    public float getFeedbackRate() {
+        return feedbackRate;
+    }
+
+    public void setFeedbackRate(float feedbackRate) {
+        this.feedbackRate = feedbackRate;
+    }
+
     public String getFeedbackText() {
         return feedbackText;
     }

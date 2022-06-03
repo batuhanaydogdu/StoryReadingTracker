@@ -16,6 +16,15 @@ public class FeedbackDto implements Serializable {
     private StoryDto storyDetails;
     private Date createdOn;
 
+    private float feedbackRate;
+
+    public float getFeedbackRate() {
+        return feedbackRate;
+    }
+
+    public void setFeedbackRate(float feedbackRate) {
+        this.feedbackRate = feedbackRate;
+    }
 
     public long getId() {
         return id;

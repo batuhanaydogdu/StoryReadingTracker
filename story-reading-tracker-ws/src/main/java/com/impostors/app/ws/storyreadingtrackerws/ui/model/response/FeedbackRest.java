@@ -14,6 +14,16 @@ public class FeedbackRest {
     private StoryRest storyDetails;
     private Date createdOn;
 
+    private float feedbackRate;
+
+    public float getFeedbackRate() {
+        return feedbackRate;
+    }
+
+    public void setFeedbackRate(float feedbackRate) {
+        this.feedbackRate = feedbackRate;
+    }
+
     public String getFeedbackId() {
         return feedbackId;
     }
