@@ -1,27 +1,21 @@
 package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 
-import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserAvatarException;
+import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.AvatarEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.entity.RoleEntity;
-import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.AvatarRepository;
-import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.RoleRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.service.AvatarService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.*;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 @Service
 public class AvatarServiceImpl implements AvatarService {
@@ -116,12 +110,15 @@ public class AvatarServiceImpl implements AvatarService {
         AvatarDto returnValue= modelMapper.map(avatarEntity,AvatarDto.class);
 
         UserEntity userEntity=userRepository.findByEmail(username);
-        if(userEntity.getPoints()>avatar.getAvatarPrice()){
+        
+        if(userEntity.getAvatars().contains(avatarEntity)) throw new UserServiceException(ErrorMessages.AVATAR_ALREADY_BOUGHT.getErrorMessage());
+        if(userEntity.getPoints()<avatar.getAvatarPrice()) throw new UserServiceException(ErrorMessages.NO_ENUGH_CREDIT.getErrorMessage());
+
+        else if(userEntity.getPoints()>=avatar.getAvatarPrice()){
             userEntity.setPoints(userEntity.getPoints()- avatar.getAvatarPrice());
             userEntity.getAvatars().add(avatarEntity);
             userRepository.save(userEntity);
         }
-        else throw new UserAvatarException(ErrorMessages.NO_ENUGH_CREDIT.getErrorMessage());
 
 
 

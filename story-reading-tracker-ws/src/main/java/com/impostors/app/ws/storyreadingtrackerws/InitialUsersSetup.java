@@ -10,10 +10,12 @@ import java.util.List;
 import com.impostors.app.ws.storyreadingtrackerws.io.document.Contour;
 import com.impostors.app.ws.storyreadingtrackerws.io.document.FaceExperienceDocument;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.AuthorityEntity;
+import com.impostors.app.ws.storyreadingtrackerws.io.entity.AvatarEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.RoleEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mongodb.FaceExperienceRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.AuthorityRepository;
+import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.AvatarRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.RoleRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Roles;
@@ -34,6 +36,9 @@ public class InitialUsersSetup {
 	
 	@Autowired
 	RoleRepository roleRepository;
+
+	@Autowired
+	AvatarRepository avatarRepository;
 	
 	@Autowired
 	Utils utils;
@@ -50,6 +55,43 @@ public class InitialUsersSetup {
 	@Transactional
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		System.out.println("denemstarttttttt");
+
+		AvatarEntity avatar1=new AvatarEntity();
+		AvatarEntity avatar2=new AvatarEntity();
+		AvatarEntity avatar3=new AvatarEntity();
+		AvatarEntity avatar4=new AvatarEntity();
+
+		avatar1.setAvatarId("lmd7j5lL");
+		avatar1.setAvatarName("avatar1");
+		avatar1.setAvatarPrice(1);
+		avatar1.setAvatarURL("avatar1.jpg");
+		if(avatarRepository.findByAvatarName("avatar1")==null){
+			avatarRepository.save(avatar1);
+		};
+
+		avatar2.setAvatarId("qc6cGDqE");
+		avatar2.setAvatarName("avatar2");
+		avatar2.setAvatarPrice(1);
+		avatar2.setAvatarURL("avatar2.jpg");
+		if(avatarRepository.findByAvatarName("avatar2")==null){
+			avatarRepository.save(avatar2);
+		};
+
+		avatar3.setAvatarId("sY95Ztuu");
+		avatar3.setAvatarName("avatar3");
+		avatar3.setAvatarPrice(1);
+		avatar3.setAvatarURL("avatar3.jpg");
+		if(avatarRepository.findByAvatarName("avatar3")==null){
+			avatarRepository.save(avatar3);
+		};
+
+		avatar4.setAvatarId("Gqh2H658");
+		avatar4.setAvatarName("avatar4");
+		avatar4.setAvatarPrice(1);
+		avatar4.setAvatarURL("avatar4.jpg");
+		if(avatarRepository.findByAvatarName("avatar4")==null){
+			avatarRepository.save(avatar4);
+		};
 
 
 

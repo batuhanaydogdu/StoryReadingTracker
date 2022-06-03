@@ -23,6 +23,9 @@ public class FeedbackEntity implements Serializable {
     @Column(nullable=false)
     private boolean feedbackRead;
 
+    @Column(nullable = false)
+    private float feedbackRate;
+
     @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @JoinColumn(name="users_id")
     private UserEntity userDetails;
@@ -34,6 +37,14 @@ public class FeedbackEntity implements Serializable {
     @Column(nullable=false)
     private Date createdOn;
 
+
+    public float getFeedbackRate() {
+        return feedbackRate;
+    }
+
+    public void setFeedbackRate(float feedbackRate) {
+        this.feedbackRate = feedbackRate;
+    }
 
     public long getId() {
         return id;

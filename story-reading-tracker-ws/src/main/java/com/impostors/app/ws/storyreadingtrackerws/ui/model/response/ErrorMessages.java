@@ -8,9 +8,11 @@ public enum ErrorMessages {
 	NO_RECORD_FOUND("Record with provided id is not found"),
 	AUTHENTICATION_FAILED("Authentication failed"),
 	COULD_NOT_UPDATE_RECORD("Couldn't update record"),
+	AVATAR_ALREADY_BOUGHT("Avatar already bought"),
 	COULD_NOT_DELETE_RECORD("Couldn't delete record"),
 	NO_ENUGH_CREDIT("No enough point to buy this avatar"),
 	EMAIL_ADDRESS_NOT_VERIFIED("Email address couldn't be verified");
+
 
 	
 	private String errorMessage;
