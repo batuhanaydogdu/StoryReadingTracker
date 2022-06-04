@@ -4,18 +4,22 @@ import com.impostors.app.ws.storyreadingtrackerws.exceptions.StoryServiceExcepti
 import com.impostors.app.ws.storyreadingtrackerws.exceptions.UserServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.service.UserService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Roles;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.UserDto;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.UserDetailsRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.UserUpdateRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.ErrorMessages;
+import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.StoryRest;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.UserSimpleRest;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @RestController
 @RequestMapping("users")
@@ -98,6 +102,35 @@ public class UserController {
 
 
     }
+
+
+    @GetMapping(path="/getAllNormal")
+    public List<UserSimpleRest> getAllNormalUserListByPoints()
+    {
+        ArrayList<UserSimpleRest> returnValue=new ArrayList<>();
+
+
+
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        List<UserDto> takenUsers=new ArrayList<>();
+
+        takenUsers= userService.getAllNormalUserListByPoints();
+
+
+        for(UserDto userDto:takenUsers){
+            returnValue.add(modelMapper.map(userDto,UserSimpleRest.class));
+
+
+        }
+
+        return returnValue;
+    }
+
+
 
 
 }
