@@ -10,7 +10,7 @@ public class FeedbackRest {
     private String feedbackId;
     private String feedbackText;
     private boolean feedbackRead;
-    private UserDto userDetails;  //later make it rest model of user
+    private UserSimpleRest userDetails;  //later make it rest model of user
     private StoryRest storyDetails;
     private Date createdOn;
 
@@ -48,11 +48,11 @@ public class FeedbackRest {
         this.feedbackRead = feedbackRead;
     }
 
-    public UserDto getUserDetails() {
+    public UserSimpleRest getUserDetails() {
         return userDetails;
     }
 
-    public void setUserDetails(UserDto userDetails) {
+    public void setUserDetails(UserSimpleRest userDetails) {
         this.userDetails = userDetails;
     }
 

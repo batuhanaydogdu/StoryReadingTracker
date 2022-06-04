@@ -15,6 +15,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,10 +50,46 @@ public class FeedbackController {
 
     }
 
- /*   @GetMapping(path="/{storyId}")
-    public List<FeedbackRest> getFeedbacksOfTheStory(@PathVariable String storyId)throws Exception
+    @GetMapping(path = "/getAll")
+    public List<FeedbackRest> getFeedbacks()throws Exception
     {
+        List<FeedbackRest> returnValue=new ArrayList<>();
 
-    }*/
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        List<FeedbackDto> takenFeedbacks=new ArrayList<>();
+
+        takenFeedbacks=feedbackService.getAllFeedbacks();
+
+        for(FeedbackDto feedbackDto:takenFeedbacks){
+            returnValue.add(modelMapper.map(feedbackDto,FeedbackRest.class));
+
+
+        }
+
+        return returnValue;
+    }
+
+
+    @PutMapping(path="/{feedbackId}/checked")
+    public void checkFeedback(@PathVariable String feedbackId){
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        feedbackService.updateAsChecked(feedbackId);
+
+
+    }
+
+
+
+
+
+
 
 }
