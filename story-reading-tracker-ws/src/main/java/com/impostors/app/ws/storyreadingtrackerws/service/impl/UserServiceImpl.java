@@ -1,11 +1,13 @@
 package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.RoleEntity;
+import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.RoleRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
 import com.impostors.app.ws.storyreadingtrackerws.security.UserPrincipal;
 import com.impostors.app.ws.storyreadingtrackerws.service.UserService;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.UserDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
 import org.modelmapper.ModelMapper;
@@ -17,8 +19,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -158,6 +162,26 @@ public class UserServiceImpl implements UserService {
 
         UserEntity updatedUser=userRepository.save(userEntity);
         UserDto returnValue = modelMapper.map(updatedUser,UserDto.class);
+
+        return returnValue;
+    }
+
+    @Override
+    public List<UserDto> getAllNormalUserListByPoints() {
+        List<UserEntity> userEntities=new ArrayList<>();
+        List<UserDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+
+        userEntities=userRepository.getAllUsersNotAdmins();
+
+        for(UserEntity userEntity: userEntities){
+
+                returnValue.add(modelMapper.map(userEntity,UserDto.class));
+
+        }
+
+
 
         return returnValue;
     }

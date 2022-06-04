@@ -2,6 +2,7 @@ package com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql;
 
 import java.util.List;
 
+import com.impostors.app.ws.storyreadingtrackerws.io.entity.StoryEntity;
 import com.impostors.app.ws.storyreadingtrackerws.io.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,11 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, L
     Page<UserEntity> findAllUsersWithConfirmedEmailAddress(Pageable pageableRequest);
 
 
-
+    @Query(value="SELECT u.*\n" +
+            "FROM (users u inner join users_roles ur on ur.users_id=u.id) inner join roles r on r.id=ur.roles_id\n" +
+            "where r.name!='ROLE_ADMIN'\n" +
+            "ORDER BY u.points desc ",nativeQuery = true)
+    List<UserEntity> getAllUsersNotAdmins();
 
 
 
