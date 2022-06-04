@@ -77,6 +77,24 @@ public class AvatarController {
         return returnValue;
     }
 
+    @GetMapping(path="/userAvatars")
+    public List<AvatarRest> getUserAvatars(){
+        ArrayList<AvatarRest> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //Intelligently matches source and destination properties
+
+        List<AvatarDto> takenAvatars=new ArrayList<>();
+
+        takenAvatars=avatarService.getUsersAvatars();
+
+        for(AvatarDto avatarDto :takenAvatars){
+            returnValue.add(modelMapper.map(avatarDto,AvatarRest.class));
+        }
+
+        return returnValue;
+    }
 
 
 

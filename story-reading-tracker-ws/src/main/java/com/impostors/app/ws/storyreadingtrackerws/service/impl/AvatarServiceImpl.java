@@ -142,4 +142,28 @@ public class AvatarServiceImpl implements AvatarService {
 
         return returnValue;
     }
+
+    @Override
+    public List<AvatarDto> getUsersAvatars() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        UserEntity userEntity=userRepository.findByEmail(username);
+
+        List<AvatarEntity> avatarEntities=new ArrayList<>();
+        List<AvatarDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        avatarEntities=avatarRepository.findAllAvatarsByUserId(userEntity.getId());
+
+        for(AvatarEntity avatarEntity: avatarEntities){
+            returnValue.add(modelMapper.map(avatarEntity,AvatarDto.class));
+        }
+
+        return returnValue;
+    }
 }
