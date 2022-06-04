@@ -42,6 +42,9 @@ public class UserEntity implements Serializable {
     @Column(nullable=false)
     private String encryptedPassword;
 
+    @Column(nullable=true)
+    private String chosenAvatarUrl;
+
     private String emailVerificationToken;
 
     @Column(nullable=false,columnDefinition = "boolean default false")
@@ -213,5 +216,13 @@ public class UserEntity implements Serializable {
 
     public void setPasswordChanges(Collection<PasswordChangeEntity> passwordChanges) {
         this.passwordChanges = passwordChanges;
+    }
+
+    public String getChosenAvatarUrl() {
+        return chosenAvatarUrl;
+    }
+
+    public void setChosenAvatarUrl(String chosenAvatarUrl) {
+        this.chosenAvatarUrl = chosenAvatarUrl;
     }
 }

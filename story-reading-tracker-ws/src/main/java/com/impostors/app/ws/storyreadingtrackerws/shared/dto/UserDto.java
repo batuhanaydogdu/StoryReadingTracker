@@ -21,6 +21,7 @@ public class UserDto implements Serializable {
     private String emailVerificationToken;
     private Boolean emailVerificationStatus;
     private Collection<String> roles;
+    private String chosenAvatarUrl;
 
 
     public UserDto() {
@@ -136,5 +137,13 @@ public class UserDto implements Serializable {
 
     public void setTermsAndPoliciesAccepted(boolean termsAndPoliciesAccepted) {
         this.termsAndPoliciesAccepted = termsAndPoliciesAccepted;
+    }
+
+    public String getChosenAvatarUrl() {
+        return chosenAvatarUrl;
+    }
+
+    public void setChosenAvatarUrl(String chosenAvatarUrl) {
+        this.chosenAvatarUrl = chosenAvatarUrl;
     }
 }
