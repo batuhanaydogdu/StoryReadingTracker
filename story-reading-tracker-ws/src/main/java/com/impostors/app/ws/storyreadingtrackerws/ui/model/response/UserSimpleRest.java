@@ -9,6 +9,7 @@ public class UserSimpleRest {
     private String gender;
     private int points;
     private boolean termsAndPoliciesAccepted;
+    private String chosenAvatarUrl;
 
 
     public String getUserId() {
@@ -66,5 +67,13 @@ public class UserSimpleRest {
 
     public void setTermsAndPoliciesAccepted(boolean termsAndPoliciesAccepted) {
         this.termsAndPoliciesAccepted = termsAndPoliciesAccepted;
+    }
+
+    public String getChosenAvatarUrl() {
+        return chosenAvatarUrl;
+    }
+
+    public void setChosenAvatarUrl(String chosenAvatarUrl) {
+        this.chosenAvatarUrl = chosenAvatarUrl;
     }
 }
