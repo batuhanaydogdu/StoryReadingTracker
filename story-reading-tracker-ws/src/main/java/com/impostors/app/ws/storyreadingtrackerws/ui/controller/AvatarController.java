@@ -96,6 +96,20 @@ public class AvatarController {
         return returnValue;
     }
 
+    @PutMapping(path="/selectAvatar")
+    public AvatarRest selectAvatar(@RequestBody AvatarDetailsRequestModel avatarDetailsRequestModel){
+        AvatarRest returnValue=new AvatarRest();
+        ModelMapper modelMapper=new ModelMapper();
+        AvatarDto avatarDto=modelMapper.map(avatarDetailsRequestModel,AvatarDto.class);
+
+
+        AvatarDto createdAvatar=avatarService.selectAvatar(avatarDto);
+        returnValue=modelMapper.map(createdAvatar, AvatarRest.class);
+        return returnValue;
+
+
+    }
+
 
 
 }
