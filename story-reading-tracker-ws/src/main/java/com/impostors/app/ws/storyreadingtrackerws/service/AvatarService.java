@@ -10,8 +10,10 @@ public interface AvatarService {
     List<AvatarDto> getAvatarsOfCurrentUser();
     AvatarDto createAvatar(AvatarDto avatar);
     AvatarDto buyAvatar(AvatarDto avatar);
+    AvatarDto selectAvatar(AvatarDto avatar);
 
     List<AvatarDto> getAllAvatars();
     List<AvatarDto> getUsersAvatars();
+
 
 }
