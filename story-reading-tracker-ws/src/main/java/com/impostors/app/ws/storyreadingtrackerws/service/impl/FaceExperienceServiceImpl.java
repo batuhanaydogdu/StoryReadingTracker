@@ -2,6 +2,7 @@ package com.impostors.app.ws.storyreadingtrackerws.service.impl;
 
 import com.impostors.app.ws.storyreadingtrackerws.io.document.Contour;
 import com.impostors.app.ws.storyreadingtrackerws.io.document.FaceExperienceDocument;
+import com.impostors.app.ws.storyreadingtrackerws.io.document.WordMicrophone;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mongodb.FaceExperienceRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.StoryRepository;
 import com.impostors.app.ws.storyreadingtrackerws.io.repository.mysql.UserRepository;
@@ -9,6 +10,7 @@ import com.impostors.app.ws.storyreadingtrackerws.service.FaceExperienceService;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.ContourDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.FaceExperienceDto;
 import com.impostors.app.ws.storyreadingtrackerws.shared.dto.Utils;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.WordMicrophoneDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +98,34 @@ public class FaceExperienceServiceImpl implements FaceExperienceService {
         faceExperienceRepository.save(faceExperienceDocument);
     }
 
+
+
+    @Override
+    public void addWords(WordMicrophoneDto wordMicrophoneDto, String faceExperienceId) {
+        FaceExperienceDocument faceExperienceDocument=faceExperienceRepository.findById(faceExperienceId).get();
+
+        if(faceExperienceDocument==null){
+            throw new RuntimeException("There is no such a Reading Face Experience.");
+        }
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        WordMicrophone wordMicrophone=modelMapper.map(wordMicrophoneDto, WordMicrophone.class);
+
+        if(faceExperienceDocument.getWords()==null){
+            faceExperienceDocument.setWords(new ArrayList<>());
+
+        }
+
+        faceExperienceDocument.getWords().add(wordMicrophone);
+
+        faceExperienceRepository.save(faceExperienceDocument);
+    }
+
+
+
+
     @Override
     public void addAllContours(List<ContourDto> contourDtoList, String faceExperienceId) {
         FaceExperienceDocument faceExperienceDocument=faceExperienceRepository.findById(faceExperienceId).get();
@@ -139,4 +169,27 @@ public class FaceExperienceServiceImpl implements FaceExperienceService {
 
         return returnValue;
     }
+
+    @Override
+    public List<WordMicrophoneDto> getWordsOfMicrophone(String faceExperienceId) {
+        FaceExperienceDocument faceExperienceDocument=faceExperienceRepository.findById(faceExperienceId).get();
+        if(faceExperienceDocument==null){
+            throw new RuntimeException("There is no such a Reading Face Experience.");
+        }
+        List<WordMicrophoneDto> returnValue=new ArrayList<>();
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+        for(WordMicrophone wordMicrophone: faceExperienceDocument.getWords()){
+            WordMicrophoneDto wordMicrophoneDto=modelMapper.map(wordMicrophone,WordMicrophoneDto.class);
+            returnValue.add(wordMicrophoneDto);
+        }
+
+
+        return returnValue;
+    }
+
+
 }
