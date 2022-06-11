@@ -16,6 +16,7 @@ public class FaceExperienceDocument {
     private String userId;
     private String storyId;
     private List<Contour> Points;
+    private List<WordMicrophone> words;
     private Date readingDate;
 
 
@@ -57,5 +58,13 @@ public class FaceExperienceDocument {
 
     public void setReadingDate(Date readingDate) {
         this.readingDate = readingDate;
+    }
+
+    public List<WordMicrophone> getWords() {
+        return words;
+    }
+
+    public void setWords(List<WordMicrophone> words) {
+        this.words = words;
     }
 }

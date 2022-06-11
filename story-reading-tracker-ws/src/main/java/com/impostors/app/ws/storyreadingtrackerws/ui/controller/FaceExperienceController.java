@@ -4,13 +4,11 @@ package com.impostors.app.ws.storyreadingtrackerws.ui.controller;
 import com.impostors.app.ws.storyreadingtrackerws.exceptions.StoryServiceException;
 import com.impostors.app.ws.storyreadingtrackerws.io.document.Contour;
 import com.impostors.app.ws.storyreadingtrackerws.service.FaceExperienceService;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.ContourDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.FaceExperienceDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.FeedbackDto;
-import com.impostors.app.ws.storyreadingtrackerws.shared.dto.StoryUserDto;
+import com.impostors.app.ws.storyreadingtrackerws.shared.dto.*;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.ContourRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.FaceExperienceRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.FeedbackRequestModel;
+import com.impostors.app.ws.storyreadingtrackerws.ui.model.request.WordMicrophoneRequestModel;
 import com.impostors.app.ws.storyreadingtrackerws.ui.model.response.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -63,6 +61,24 @@ public class FaceExperienceController {
 
     }
 
+
+    @PutMapping(path="/{faceExperienceId}/microphone")
+    public void addWords(@RequestBody WordMicrophoneRequestModel wordMicrophoneDetails, @PathVariable String faceExperienceId) throws Exception
+    {
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT); //it has to match with perfectly matching names
+
+        WordMicrophoneDto wordMicrophoneDto=modelMapper.map(wordMicrophoneDetails,WordMicrophoneDto.class);
+
+
+        faceExperienceService.addWords(wordMicrophoneDto,faceExperienceId);
+
+    }
+
+
+
     @PutMapping(path="/{faceExperienceId}/all")
     public void addAllContours(@RequestBody List<ContourRequestModel> contourDetails, @PathVariable String faceExperienceId) throws Exception
     {
@@ -96,6 +112,25 @@ public class FaceExperienceController {
         for(ContourDto contourDto:contourDtos) {
             ContourRest contourRest=modelMapper.map(contourDto,ContourRest.class);
             returnValue.add(contourRest);
+        }
+
+        return returnValue;
+    }
+
+    @GetMapping(path="/{faceExperienceId}/microphone")
+    public List<WordsMicrophoneRest> getAllWords(@PathVariable String faceExperienceId){
+        List<WordsMicrophoneRest> returnValue=new ArrayList<>();
+
+        List<WordMicrophoneDto> wordMicrophoneDtos=faceExperienceService.getWordsOfMicrophone(faceExperienceId);
+
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
+
+
+        for(WordMicrophoneDto wordMicrophoneDto:wordMicrophoneDtos) {
+            WordsMicrophoneRest wordsMicrophoneRest=modelMapper.map(wordMicrophoneDto,WordsMicrophoneRest.class);
+            returnValue.add(wordsMicrophoneRest);
         }
 
         return returnValue;
