@@ -34,8 +34,6 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, L
 
 
 
-
-
     @Query(value="select * from Users u where u.first_name=?1 ",nativeQuery = true)
     List<UserEntity> findUserByFirstName(String firstName);
 
